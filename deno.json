@@ -1,0 +1,6 @@
+{
+  "name": "@kenta/stream-exec",
+  "version": "0.0.1",
+  "license": "MIT",
+  "exports": "./streamExec.ts"
+}
