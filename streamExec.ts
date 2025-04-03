@@ -10,14 +10,20 @@
 export async function streamExec(
   command: string,
   options: Deno.CommandOptions = {},
+  stdinValue = "",
   stdoutCallback = console.log,
   stderrCallback = console.error,
 ): Promise<number> {
   const process = new Deno.Command(command, {
     ...options,
+    stdin: "piped",
     stdout: "piped",
     stderr: "piped",
   }).spawn();
+
+  const stdinWriter = process.stdin.getWriter();
+  await stdinWriter.write(new TextEncoder().encode(stdinValue));
+  stdinWriter.close();
 
   const stdoutReader = process.stdout.getReader();
   const stderrReader = process.stderr.getReader();
