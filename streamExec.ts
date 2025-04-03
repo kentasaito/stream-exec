@@ -1,8 +1,10 @@
 /**
  * Executes a shell command asynchronously and streams stdout and stderr.
+ * Optionally, sends data to the command's stdin.
  * 
  * @param command The shell command to execute.
  * @param options Additional options for Deno.Command (optional).
+ * @param stdinValue Data to be sent to stdin of the command (default: empty string).
  * @param stdoutCallback Callback function to handle stdout (default: console.log).
  * @param stderrCallback Callback function to handle stderr (default: console.error).
  * @returns A promise that resolves with the command's exit code.
