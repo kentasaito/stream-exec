@@ -22,9 +22,12 @@ deno add jsr:@kenta/stream-exec
 ```ts
 import { streamExec } from "@kenta/stream-exec";
 
-await streamExec("echo One; sleep 1; echo T-W-O >&2; sleep 1; echo Three!", {
-  stdoutCallback: (data) => console.log("stdout:", data),
-  stderrCallback: (data) => console.error("stderr:", data),
-});
+await streamExec(
+  "ping",
+  { args: ["-c", "3", "example.com"] },
+  "",
+  (msg) => console.log(`stdout: ${msg}`),
+  (msg) => console.error(`stderr: ${msg}`),
+);
 ```
 
