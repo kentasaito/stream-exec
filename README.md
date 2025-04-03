@@ -7,6 +7,7 @@ A Deno module for executing shell commands asynchronously with real-time stdout 
 - Executes commands asynchronously
 - Streams both stdout and stderr line by line
 - Supports callback functions for custom handling
+- Returns the command's exit code
 
 ## Installation
 

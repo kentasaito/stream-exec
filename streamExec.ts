@@ -3,16 +3,16 @@
  * 
  * @param command The shell command to execute.
  * @param options Additional options for Deno.Command (optional).
- * @param stdoutCallback The callback function to handle stdout (default: console.log).
- * @param stderrCallback The callback function to handle stderr (default: console.error).
- * @returns A promise that resolves once the command finishes execution.
+ * @param stdoutCallback Callback function to handle stdout (default: console.log).
+ * @param stderrCallback Callback function to handle stderr (default: console.error).
+ * @returns A promise that resolves with the command's exit code.
  */
 export async function streamExec(
   command: string,
   options: Deno.CommandOptions = {},
   stdoutCallback = console.log,
   stderrCallback = console.error,
-) {
+): Promise<number> {
   const process = new Deno.Command(command, {
     ...options,
     stdout: "piped",
@@ -38,4 +38,7 @@ export async function streamExec(
     readStream(stdoutReader, stdoutCallback),
     readStream(stderrReader, stderrCallback),
   ]);
+
+  const { code } = await process.status;
+  return code;
 }
